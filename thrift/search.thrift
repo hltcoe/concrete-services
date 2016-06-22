@@ -10,6 +10,7 @@ namespace cpp concrete
 
 include "structure.thrift"
 include "uuid.thrift"
+include "metadata.thrift"
 
 /**
  * Wrapper for information relevant to a (possibly structured) search.
