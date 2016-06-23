@@ -4,9 +4,9 @@
  * See LICENSE in the project root directory.
  */
 
-namespace java edu.jhu.hlt.concrete
+namespace java edu.jhu.hlt.concrete.search
 namespace py concrete.search
-namespace cpp concrete
+namespace cpp concrete.search
 
 include "structure.thrift"
 include "uuid.thrift"
