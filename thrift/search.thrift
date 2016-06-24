@@ -26,7 +26,7 @@ struct SearchQuery {
    * semantics: that is the responsibility of the individual
    * implementation.
    */
-  1. optional list<string> keywords
+  1: optional list<string> keywords
 
   /**
    * e.g., "what is the capital of spain?"
@@ -35,7 +35,7 @@ struct SearchQuery {
    * the question can be included, e.g.: "what is the name of spain's
    * capital?"
    */
-  2. optional list<string> questions
+  2: optional list<string> questions
 }
 
 /**
@@ -46,20 +46,20 @@ struct SearchQuery {
  */
 struct SearchResult {
   // e.g., nytimes_145
-  1. optional string communicationId
+  1: optional string communicationId
 
   /** 
    * The UUID of the returned sentence, which appears in the
    * communication referenced by communicationId.
    */
-  2. optional uuid.UUID sentenceId
+  2: optional uuid.UUID sentenceId
 
   /**
    * Values are not restricted in range (e.g., do not have to be
    * within [0,1]).  Higher is better.
    *
    */
-  3. optional double score
+  3: optional double score
 }
 
 /**
@@ -71,21 +71,21 @@ struct SearchResults {
    * reflected by the values contained in the score field of each
    * SearchResult, if that field is populated.
    */
-  1. optional list<SearchResult>
+  1: optional list<SearchResult> searchResults
 
   /**
    * The query that led to this result: likely use case for populating
    * this field is for building training data.  Presumably a
    * system will not need/want to return this object in live use.
    */
-  2. optional SearchQuery
+  2: optional SearchQuery searchQuery
 
   /**
    * The system that provided the response: likely use case for
    * populating this field is for building training data.  Presumably
    * a system will not need/want to return this object in live use.
    */
-  3. optional AnnotationMetadata
+  3: optional metadata.AnnotationMetadata metadata
 }
 
 service Search {
