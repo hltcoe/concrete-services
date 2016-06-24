@@ -5,15 +5,15 @@
  */
 
 namespace java edu.jhu.hlt.concrete.access
-namespace py concrete.search
-namespace cpp concrete.search
+namespace py concrete.access
+namespace cpp concrete.access
 
 include "communications.thrift"
 
 /**
- * Struct representing results. Supports the Retriever service.
+ * Struct representing results from the Retriever service.
  */
-struct Results {
+struct RetrieveResults {
   /**
    * a list of Communication objects that represent the results of the request
    */
@@ -21,27 +21,24 @@ struct Results {
 }
 
 /**
- * Struct representing a request. Used to support the Retriever service.
+ * Struct representing a request from Retriever service.
  */
-struct Request {
+struct RetrieveRequest {
   /**
-   * a list of Communication document IDs
+   * a list of Communication IDs
    */
-  1. required list<string> commIdList
+  1. required list<string> communicationIds
   /**
    * optional authentication mechanism
    */
-  2. optional bytes auths;
+  2. optional string auths
 }
 
 /**
- * Service to be used by a GUI to retrieve particular communications.
+ * Service to retrieve particular communications.
  */ 
 service Retriever {
-  /**
-   * Return a Results object given a Request object.
-   */
-  1. Results retrieve(1: Request request)
+  1. RetrieveResults retrieve(1: RetrieveRequest request)
 }
 
 /**
