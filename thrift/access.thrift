@@ -9,6 +9,7 @@ namespace py concrete.access
 namespace cpp concrete.access
 
 include "communication.thrift"
+include "access_ex.thrift"
 
 /**
  * Struct representing results from the Retriever service.
@@ -38,7 +39,7 @@ struct RetrieveRequest {
  * Service to retrieve particular communications.
  */ 
 service Retriever {
-  RetrieveResults retrieve(1: RetrieveRequest request)
+  RetrieveResults retrieve(1: RetrieveRequest request) throws (1: access_ex.RetrieveException ex)
 }
 
 /**
@@ -58,5 +59,5 @@ service Sender {
    * methods that unset annotations you feel the receiver would not
    * find useful in order to reduce network overhead.
    */
-  oneway void send(1: communication.Communication communication)
+  void send(1: communication.Communication communication) throws (1: access_ex.SendException ex)
 }
