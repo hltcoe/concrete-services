@@ -5,7 +5,7 @@
  */
 
 namespace java edu.jhu.hlt.concrete.search
-namespace py concrete_search
+namespace py concrete_services.search
 namespace cpp concrete.search
 
 include "structure.thrift"
