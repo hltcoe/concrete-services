@@ -5,7 +5,7 @@
  */
 
 namespace java edu.jhu.hlt.concrete.access
-namespace py concrete_services.access
+namespace py concrete.access
 namespace cpp concrete.access
 
 include "communication.thrift"
