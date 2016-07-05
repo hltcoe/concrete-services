@@ -36,6 +36,16 @@ struct SearchQuery {
    * capital?"
    */
   2: optional list<string> questions
+
+  /**
+   * Refers to an optional communication that can provide context for the query.
+   */
+  3. optional string communicationId
+
+  /**
+   * Refers to a sequence of tokens in the communication referenced by communicationId.
+   */
+  4. optional tokenRefSequence tokens
 }
 
 /**
