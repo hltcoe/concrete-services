@@ -126,6 +126,40 @@ struct SearchResults {
 }
 
 service Search {
+  /**
+   * Perform a search and return communications
+   */
   SearchResults searchCommunications(1: SearchQuery query)
+
+  /**
+   * Perform a search and return sentences within communications
+   */
   SearchResults searchSentences(1: SearchQuery query)
+}
+
+/**
+ * Feedback values
+ */
+enum SearchFeedback {
+  NEGATIVE = -1
+  NONE = 0
+  POSITIVE = 1
+}
+
+service Feedback {
+  /**
+   * Start providing feedback for the specified SearchResults.
+   * This causes the search and its results to be persisted.
+   */
+  void startFeedback(1: SearchResults results)
+
+  /**
+   * Provide feedback on the relevance of a particular communication to a search
+   */
+  void addCommunicationFeedback(1: uuid.UUID searchResultsId, 2: string communicationId, 3: SearchFeedback feedback)
+
+  /**
+   * Provide feedback on the relevance of a particular sentence to a search
+   */
+  void addSentenceFeedback(1: uuid.UUID searchResultsId, 2: string communicationId, 3: uuid.UUID sentenceId, 4: SearchFeedback feedback)
 }
