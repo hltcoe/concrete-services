@@ -51,6 +51,11 @@ struct SearchQuery {
    * The input from the user provided in the search box, unmodified
    */
   5: optional string rawQuery
+
+  /**
+   * optional authorization mechanism
+   */
+  6: optional string auths
 }
 
 /**

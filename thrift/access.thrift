@@ -53,7 +53,7 @@ struct RetrieveResults {
 }
 
 /**
- * Struct representing a request from Retriever service.
+ * Struct representing a request for the Retriever service.
  */
 struct RetrieveRequest {
   /**
@@ -61,7 +61,7 @@ struct RetrieveRequest {
    */
   1: required list<string> communicationIds
   /**
-   * optional authentication mechanism
+   * optional authorization mechanism
    */
   2: optional string auths
 }
