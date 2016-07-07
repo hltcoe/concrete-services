@@ -46,6 +46,11 @@ struct SearchQuery {
    * Refers to a sequence of tokens in the communication referenced by communicationId.
    */
   4: optional structure.TokenRefSequence tokens
+
+  /** 
+   * The input from the user provided in the search box, unmodified
+   */
+  5: optional string rawQuery
 }
 
 /**
