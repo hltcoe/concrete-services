@@ -21,12 +21,12 @@ struct SearchQuery {
    * cheese'.  It is the responsibility of the implementation of
    * Search* to tokenize multiword phrases, if so-desired.  Further,
    * an implementation may choose to support advanced features such as
-   * wildcards, e.g.: 'blue *'.  This specification makes no
+   * wildcards, e.g.: 'blue*'.  This specification makes no
    * committment as to the internal structure of keywords and their
    * semantics: that is the responsibility of the individual
    * implementation.
    */
-  1: optional list<string> keywords
+  1: optional list<string> terms
 
   /**
    * e.g., "what is the capital of spain?"
