@@ -87,7 +87,7 @@ struct SearchResult {
    * in order to provide a hint to the client as to where to center a
    * visualization, or the extraction of context, etc.
    */
-  4: optional tokenRefSequence tokens
+  4: optional structure.TokenRefSequence tokens
 }
 
 /**
