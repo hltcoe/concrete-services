@@ -56,6 +56,11 @@ struct SearchQuery {
    * optional authorization mechanism
    */
   6: optional string auths
+
+  /**
+   * Identifies the user who submitted the search query
+   */
+  7: optional string userId
 }
 
 /**
@@ -100,18 +105,17 @@ struct SearchResults {
   1: required uuid.UUID uuid
 
   /**
+   * The query that led to this result.
+   * Useful for capturing feedback or building training data.
+   */
+  2: required SearchQuery searchQuery
+
+  /**
    * The list is assumed sorted best to worst, which should be
    * reflected by the values contained in the score field of each
    * SearchResult, if that field is populated.
    */
-  2: optional list<SearchResult> searchResults
-
-  /**
-   * The query that led to this result: likely use case for populating
-   * this field is for building training data.  Presumably a
-   * system will not need/want to return this object in live use.
-   */
-  3: optional SearchQuery searchQuery
+  3: optional list<SearchResult> searchResults
 
   /**
    * The system that provided the response: likely use case for
