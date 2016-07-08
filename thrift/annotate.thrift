@@ -55,22 +55,3 @@ service Annotator {
   oneway void shutdown()
 }
 
-/**
- * A service that exists so that clients can send Concrete data
- * structures to implementing servers.
- *
- * Implement this if you are creating an analytic that wishes to
- * send its results back to a server. That server may perform
- * validation, write the new layers to a database, and so forth.
- */
-service Sender {
-  /**
-   * Send a communication to a server implementing this method.
-   *
-   * The communication that is sent back should contain the new
-   * analytic layers you wish to append. You may also wish to call
-   * methods that unset annotations you feel the receiver would not
-   * find useful in order to reduce network overhead.
-   */
-  oneway void send(1: communication.Communication communication)
-}
