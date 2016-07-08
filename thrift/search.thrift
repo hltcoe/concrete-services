@@ -80,6 +80,14 @@ struct SearchResult {
    *
    */
   3: optional double score
+
+  /**                                                                                                                                                                           
+   * If the Search is meant to result in a tokenRefSequence, this is
+   * that result.  Otherwise, this field may be optionally populated
+   * in order to provide a hint to the client as to where to center a
+   * visualization, or the extraction of context, etc.
+   */
+  4: optional tokenRefSequence tokens
 }
 
 /**
