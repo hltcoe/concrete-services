@@ -61,6 +61,19 @@ struct SearchQuery {
    * Identifies the user who submitted the search query
    */
   7: optional string userId
+
+  /**
+   * Human readable name of the query.
+   */
+  8: optional string name
+
+  /**
+   * Properties of the query or user.
+   * These labels can be used to group queries and results by a domain or group of
+   * users for training. An example usage would be assigning the geographical region
+   * as a label ("spain"). User labels could be based on organizational units ("hltcoe").
+   */
+  9: optional list<string> labels
 }
 
 /**
