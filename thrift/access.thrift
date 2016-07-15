@@ -38,7 +38,7 @@ struct RetrieveRequest {
 /**
  * Service to retrieve particular communications.
  */ 
-service Retriever {
+service Retriever extends services.Service {
   RetrieveResults retrieve(1: RetrieveRequest request) throws (1: services.ServicesException ex)
 }
 
@@ -50,7 +50,7 @@ service Retriever {
  * send its results back to a server. That server may perform
  * validation, write the new layers to a database, and so forth.
  */
-service Sender {
+service Sender extends services.Service {
   /**
    * Send a communication to a server implementing this method.
    *

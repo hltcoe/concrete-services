@@ -139,7 +139,7 @@ struct SearchResults {
   4: optional metadata.AnnotationMetadata metadata
 }
 
-service Search {
+service Search extends services.Service {
   /**
    * Perform a search and return communications
    */
@@ -160,7 +160,7 @@ enum SearchFeedback {
   POSITIVE = 1
 }
 
-service Feedback {
+service Feedback extends services.Service {
   /**
    * Start providing feedback for the specified SearchResults.
    * This causes the search and its results to be persisted.
