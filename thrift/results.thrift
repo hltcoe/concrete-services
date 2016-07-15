@@ -15,12 +15,12 @@ include "communication.thrift"
 
 service ResultsServer extends services.Service {
   /**
-   * Register the specified SearchResults for annotation.
+   * Register the specified search result for annotation.
    *
    * If a name has not been assigned to the search query, one will be generated.
    * This service also requires that the user_id field be populated in the SearchQuery.
    */
-  void registerSearchResults(1: search.SearchResults results, 2: services.AnnotationTaskType taskType)
+  void registerSearchResult(1: search.SearchResults results, 2: services.AnnotationTaskType taskType)
 
   /**
    * Get a list of search results for a particular annotation task
@@ -38,6 +38,11 @@ service ResultsServer extends services.Service {
    * Get the most recent search results for a user
    */
   search.SearchResults getLatestSearchResult(1: string userId)
+
+  /**
+   * Get a search results object
+   */
+  search.SearchResults getSearchResult(1: uuid.UUID searchResultsId)
 
   /**
    * Start an annotation session
