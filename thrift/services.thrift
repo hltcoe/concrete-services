@@ -38,6 +38,14 @@ struct AsyncContactInfo {
 }
 
 /**
+ * Annotation Tasks Types
+ */
+enum AnnotationTaskType {
+  TRANSLATION = 1
+  NER = 2
+}
+
+/**
  * Each service is described by this info struct.
  * It is for human consumption and for records of versions in deployments.
  */

@@ -12,13 +12,6 @@ include "services.thrift"
 include "uuid.thrift"
 include "communication.thrift"
 
-/**
- * Annotation Tasks Types
- */
-enum AnnotationTaskType {
-  TRANSLATION = 1
-  NER = 2
-}
 
 /**
  * An annotation unit is the part of the communication to be annotated.
@@ -52,7 +45,7 @@ struct AnnotationTask {
   /**
    * Type of annotation task
    */
-  1: required AnnotationTaskType type
+  1: required services.AnnotationTaskType type
 
   /**
    * Language of the data for the task
