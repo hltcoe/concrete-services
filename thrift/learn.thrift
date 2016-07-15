@@ -6,27 +6,14 @@
 
 namespace java edu.jhu.hlt.concrete.learn
 namespace py concrete.learn
+namespace cpp concrete.learn
 
+include "services.thrift"
 include "uuid.thrift"
 include "communication.thrift"
 
 /**
- * Contact information for the broker.
- * The active learner does not need to know about the broker because it provides
- * its contact information on each request. It can create a thrift client for
- * each request or create a pool for reuse.
- *
- * TODO: move to services.thrift
- */
-struct ThriftContactInfo {
-  1: required string host
-  2: required i32 port
-}
-
-/**
  * Annotation Tasks Types
- *
- * TODO: move to services.thrift or annotation.thrift
  */
 enum AnnotationTaskType {
   TRANSLATION = 1
@@ -111,11 +98,11 @@ struct Annotation {
  *
  * The server must be preconfigured with the details of the data source to pull communications.
  */
-service ActiveLearnerServer {
+service ActiveLearnerServer extends services.Service {
   /**
    * Start an active learning session on these communications
    */
-  bool start(1: uuid.UUID sessionId, 2: AnnotationTask task, 3: ThriftContactInfo contact)
+  bool start(1: uuid.UUID sessionId, 2: AnnotationTask task, 3: services.AsyncContactInfo contact)
 
   /**
    * Stop the learning session
@@ -126,17 +113,12 @@ service ActiveLearnerServer {
    * Add annotations from the user to the learning process
    */
   void addAnnotations(1: uuid.UUID sessionId, 2: list<Annotation> annotations)
-
-  /**
-   * Is the active learner server alive?
-   */
-  bool alive()
 }
 
 /**
- * The active learner client implements a single method to accept new sorts of the annotation units
+ * The active learner client implements a method to accept new sorts of the annotation units
  */
-service ActiveLearnerClient {
+service ActiveLearnerClient extends services.Service {
   /**
    * Submit a new sort of communications to the broker
    */

@@ -24,6 +24,20 @@ exception ServicesException {
 }
 
 /**
+ * Contact information for the asynchronous communications.
+ * When a client contacts a server for a job that takes a significant amount of time,
+ * it is often best to implement this asynchronously.
+ * We do this by having the client stand up a server to accept the results and 
+ * passing that information to the original server.
+ * The server may want to create a new thrift client on every request or maintain
+ * a pool of clients for reuse.
+ */
+struct AsyncContactInfo {
+  1: required string host
+  2: required i32 port
+}
+
+/**
  * Each service is described by this info struct.
  * It is for human consumption and for records of versions in deployments.
  */
