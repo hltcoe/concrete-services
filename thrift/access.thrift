@@ -9,38 +9,7 @@ namespace py concrete.access
 namespace cpp concrete.access
 
 include "communication.thrift"
-
-/**
- * An exception to be used with Concrete send
- * services.
- */
-exception SendException {
-  /*
-   * The explanation (why the exception occurred)
-   */
-  1: required string message
-
-  /*
-   * The serialized exception
-   */
-  2: optional binary serEx
-}
-
-/**
- * An exception to be used with Concrete retrieve
- * services.
- */
-exception RetrieveException {
-  /*
-   * The explanation (why the exception occurred)
-   */
-  1: required string message
-
-  /*
-   * The serialized exception
-   */
-  2: optional binary serEx
-}
+include "services.thrift"
 
 /**
  * Struct representing results from the Retriever service.
@@ -70,7 +39,7 @@ struct RetrieveRequest {
  * Service to retrieve particular communications.
  */ 
 service Retriever {
-  RetrieveResults retrieve(1: RetrieveRequest request) throws (1: RetrieveException ex)
+  RetrieveResults retrieve(1: RetrieveRequest request) throws (1: services.ServicesException ex)
 }
 
 /**
@@ -90,5 +59,5 @@ service Sender {
    * methods that unset annotations you feel the receiver would not
    * find useful in order to reduce network overhead.
    */
-  void send(1: communication.Communication communication) throws (1: SendException ex)
+  void send(1: communication.Communication communication) throws (1: services.ServicesException ex)
 }

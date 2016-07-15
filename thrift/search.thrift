@@ -8,6 +8,7 @@ namespace java edu.jhu.hlt.concrete.search
 namespace py concrete.search
 namespace cpp concrete.search
 
+include "services.thrift"
 include "structure.thrift"
 include "uuid.thrift"
 include "metadata.thrift"
@@ -142,12 +143,12 @@ service Search {
   /**
    * Perform a search and return communications
    */
-  SearchResults searchCommunications(1: SearchQuery query)
+  SearchResults searchCommunications(1: SearchQuery query) throws (1: services.ServicesException ex)
 
   /**
    * Perform a search and return sentences within communications
    */
-  SearchResults searchSentences(1: SearchQuery query)
+  SearchResults searchSentences(1: SearchQuery query) throws (1: services.ServicesException ex)
 }
 
 /**
@@ -164,15 +165,15 @@ service Feedback {
    * Start providing feedback for the specified SearchResults.
    * This causes the search and its results to be persisted.
    */
-  void startFeedback(1: SearchResults results)
+  void startFeedback(1: SearchResults results) throws (1: services.ServicesException ex)
 
   /**
    * Provide feedback on the relevance of a particular communication to a search
    */
-  void addCommunicationFeedback(1: uuid.UUID searchResultsId, 2: string communicationId, 3: SearchFeedback feedback)
+  void addCommunicationFeedback(1: uuid.UUID searchResultsId, 2: string communicationId, 3: SearchFeedback feedback) throws (1: services.ServicesException ex)
 
   /**
    * Provide feedback on the relevance of a particular sentence to a search
    */
-  void addSentenceFeedback(1: uuid.UUID searchResultsId, 2: string communicationId, 3: uuid.UUID sentenceId, 4: SearchFeedback feedback)
+  void addSentenceFeedback(1: uuid.UUID searchResultsId, 2: string communicationId, 3: uuid.UUID sentenceId, 4: SearchFeedback feedback) throws (1: services.ServicesException ex)
 }
