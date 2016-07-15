@@ -12,32 +12,6 @@ include "services.thrift"
 include "uuid.thrift"
 include "communication.thrift"
 
-
-/**
- * An annotation unit is the part of the communication to be annotated.
- */
-enum AnnotationUnitType {
-  COMMUNICATION = 1
-  SENTENCE = 2
-}
-
-/**
- * An annotation unit is the part of the communication to be annotated.
- * It can be the entire communication or a particular sentence in the communication.
- * If the sentenceID is null, the unit is the entire communication
- */
-struct AnnotationUnitIdentifier {
-  /**
-   * Communication identifier for loading data
-   */
-  1: required string communicationId
-
-  /**
-   * Sentence identifer if annotating sentences
-   */
-  2: optional uuid.UUID sentenceId
-}
-
 /**
  * Annotation task including information for pulling data.
  */
@@ -55,12 +29,12 @@ struct AnnotationTask {
   /**
    * Entire communication or individual sentences
    */
-  3: required AnnotationUnitType unitType
+  3: required services.AnnotationUnitType unitType
 
   /**
    * Identifiers for each annotation unit
    */
-  4: required list<AnnotationUnitIdentifier> units
+  4: required list<services.AnnotationUnitIdentifier> units
 }
 
 /**
@@ -70,7 +44,7 @@ struct Annotation {
   /**
    * Identifier of the part of the communication being annotated.
    */
-  1: required AnnotationUnitIdentifier id
+  1: required services.AnnotationUnitIdentifier id
 
   /**
    * Communication with the annotation stored in it.
@@ -115,6 +89,6 @@ service ActiveLearnerClient extends services.Service {
   /**
    * Submit a new sort of communications to the broker
    */
-  void submitSort(1: uuid.UUID sessionId, 2: list<AnnotationUnitIdentifier> unitIds)
+  void submitSort(1: uuid.UUID sessionId, 2: list<services.AnnotationUnitIdentifier> unitIds)
 }
 

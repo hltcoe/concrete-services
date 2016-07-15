@@ -8,6 +8,8 @@ namespace java edu.jhu.hlt.concrete.services
 namespace py concrete.services
 namespace cpp concrete.services
 
+include "uuid.thrift"
+
 /**
  * An exception to be used with Concrete services.
  */
@@ -43,6 +45,31 @@ struct AsyncContactInfo {
 enum AnnotationTaskType {
   TRANSLATION = 1
   NER = 2
+}
+
+/**
+ * An annotation unit is the part of the communication to be annotated.
+ */
+enum AnnotationUnitType {
+  COMMUNICATION = 1
+  SENTENCE = 2
+}
+
+/**
+ * An annotation unit is the part of the communication to be annotated.
+ * It can be the entire communication or a particular sentence in the communication.
+ * If the sentenceID is null, the unit is the entire communication
+ */
+struct AnnotationUnitIdentifier {
+  /**
+   * Communication identifier for loading data
+   */
+  1: required string communicationId
+
+  /**
+   * Sentence identifer if annotating sentences
+   */
+  2: optional uuid.UUID sentenceId
 }
 
 /**
