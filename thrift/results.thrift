@@ -26,13 +26,13 @@ service ResultsServer extends services.Service {
    * Get a list of search results for a particular annotation task
    * Set the limit to 0 to get all relevant search results
    */
-  list<search.SearchResults> getSearchResults(1: services.AnnotationTaskType taskType, 2: i16 limit) throws (1: services.ServicesException ex)
+  list<search.SearchResults> getSearchResults(1: services.AnnotationTaskType taskType, 2: i32 limit) throws (1: services.ServicesException ex)
 
   /**
    * Get a list of search results for a particular annotation task filtered by a user id
    * Set the limit to 0 to get all relevant search results
    */
-  list<search.SearchResults> getSearchResultsByUser(1: services.AnnotationTaskType taskType, 2: string userId, 3: i16 limit) throws (1: services.ServicesException ex)
+  list<search.SearchResults> getSearchResultsByUser(1: services.AnnotationTaskType taskType, 2: string userId, 3: i32 limit) throws (1: services.ServicesException ex)
 
   /**
    * Get the most recent search results for a user
