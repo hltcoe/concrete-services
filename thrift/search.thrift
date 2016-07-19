@@ -18,8 +18,12 @@ include "metadata.thrift"
  */
 enum SearchType {
   COMMUNICATIONS
+  SECTIONS
   SENTENCES
   ENTITIES
+  ENTITY_MENTIONS
+  SITUATIONS
+  SITUATION_MENTIONS
 }
 
 /**
