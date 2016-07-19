@@ -14,6 +14,15 @@ include "uuid.thrift"
 include "metadata.thrift"
 
 /**
+ * What are we searching over
+ */
+enum SearchType {
+  COMMUNICATIONS
+  SENTENCES
+  ENTITIES
+}
+
+/**
  * Wrapper for information relevant to a (possibly structured) search.
  */
 struct SearchQuery {
@@ -75,6 +84,11 @@ struct SearchQuery {
    * as a label ("spain"). User labels could be based on organizational units ("hltcoe").
    */
   9: optional list<string> labels
+
+  /**
+   * This search is over this type of data (communications, sentences, entities)
+   */
+  10: required SearchType type
 }
 
 /**
@@ -141,14 +155,9 @@ struct SearchResults {
 
 service Search extends services.Service {
   /**
-   * Perform a search and return communications
+   * Perform a search specified by the query
    */
-  SearchResults searchCommunications(1: SearchQuery query) throws (1: services.ServicesException ex)
-
-  /**
-   * Perform a search and return sentences within communications
-   */
-  SearchResults searchSentences(1: SearchQuery query) throws (1: services.ServicesException ex)
+  SearchResults search(1: SearchQuery query) throws (1: services.ServicesException ex)
 }
 
 /**
