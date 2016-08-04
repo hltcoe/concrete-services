@@ -27,6 +27,22 @@ enum SearchType {
 }
 
 /**
+ * A search provider describes its capabilities with a list of search type and language pairs.
+ */
+struct SearchCapability {
+  /**
+   * A type of search supported by the search provider
+   */
+  1: required SearchType type
+
+  /**
+   * Language that the search provider supports.
+   * Use ISO 639-2/T three letter codes.
+   */
+  2: required string lang
+}
+
+/**
  * Wrapper for information relevant to a (possibly structured) search.
  */
 struct SearchQuery {
@@ -93,6 +109,17 @@ struct SearchQuery {
    * This search is over this type of data (communications, sentences, entities)
    */
   10: required SearchType type
+
+  /**
+   * The language of the corpus that the user wants to search.
+   * Use ISO 639-2/T three letter codes.
+   */
+  11: optional string lang
+
+  /**
+   * An identifier of the corpus that the search is to be performed over.
+   */
+  12: optional string corpus
 }
 
 /**
@@ -155,6 +182,15 @@ struct SearchResults {
    * a system will not need/want to return this object in live use.
    */
   4: optional metadata.AnnotationMetadata metadata
+
+  /**
+   * The dominant language of the search results.
+   * Use ISO 639-2/T three letter codes.
+   * Search providers should set this when possible to support downstream processing.
+   * Do not set if it is not known.
+   * If multilingual, use the string "multilingual".
+   */
+  5: optional string lang
 }
 
 service Search extends services.Service {
@@ -162,6 +198,41 @@ service Search extends services.Service {
    * Perform a search specified by the query
    */
   SearchResults search(1: SearchQuery query) throws (1: services.ServicesException ex)
+
+  /**
+   * Get a list of search type-language pairs
+   */
+  list<SearchCapability> getCapabilities() throws (1: services.ServicesException ex)
+
+  /**
+   * Get a corpus list from the search provider
+   */
+  list<string> getCorpora() throws (1: services.ServicesException ex)
+}
+
+/**
+ * The search proxy service provides a single interface to multiple search providers
+ */
+service SearchProxy extends services.Service {
+  /**
+   * Specify the search provider when performing a search
+   */
+  SearchResults search(1: SearchQuery query, 2: string provider) throws (1: services.ServicesException ex)
+
+  /**
+   * Get a list of search providers behind the proxy
+   */
+  list<string> getProviders() throws (1: services.ServicesException ex)
+
+  /**
+   * Get a list of search type and language pairs for a search provider
+   */
+  list<SearchCapability> getCapabilities(1: string provider) throws (1: services.ServicesException ex)
+
+  /**
+   * Get a corpus list for a search provider
+   */
+  list<string> getCorpora(1: string provider) throws (1: services.ServicesException ex)
 }
 
 /**
